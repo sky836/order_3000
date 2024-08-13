@@ -150,6 +150,8 @@ class Exp_Main(Exp_Basic):
                 batch_size, pred_len, n_channels = pred.shape
                 pred = valid_data.inverse_transform(pred.reshape(-1, n_channels)).reshape(batch_size, pred_len,
                                                                                           n_channels)
+                print(pred.shape)
+                print(y.shape)
                 loss = criterion(pred, y)
             loss_record.append(loss)
 
