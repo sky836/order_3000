@@ -25,7 +25,7 @@ def data_provider(args, flag):
         data_set,
         shuffle=shuffle_flag,
         drop_last=drop_last,
-        #num_workers=args.num_workers,
+        num_workers=args.num_workers,
         batch_size=batch_size
     )
     return data_set, data_loader

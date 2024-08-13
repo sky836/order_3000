@@ -40,7 +40,7 @@ class data(Dataset):
         num_test = int(len(df) * 0.2)
         num_vali = len(df) - num_train - num_test
         # 设置训练集、验证集、测试集的边界范围，会有seq_len + pred_len的数据用不上
-        border1s = [0, num_train-self.seq_len-self.pred_len+1, l-num_test-self.seq_len-self.pred_len+1]
+        border1s = [0, num_train-self.seq_len, l-num_test-self.seq_len]
         border2s = [num_train, num_train+num_vali, l]
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
@@ -95,7 +95,7 @@ class data(Dataset):
         return seq_x, seq_y, seq_x_mark, seq_y_mark
 
     def __len__(self):
-        return len(self.data_x) - self.seq_len + 1
+        return len(self.data_x) - self.seq_len- self.pred_len + 1
 
     def inverse_transform(self, data):
         return self.scaler.inverse_transform(data)
