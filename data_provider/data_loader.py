@@ -36,6 +36,7 @@ class data(Dataset):
         dates = df.iloc[:, 0].values.astype('datetime64')
         # 按6：1：2划分训练集、验证集和测试集
         l = len(df)
+        print('l:' l)
         num_train = int(len(df) * 0.6)
         num_test = int(len(df) * 0.2)
         num_vali = len(df) - num_train - num_test

@@ -80,7 +80,7 @@ def main():
     parser.add_argument('--learning_rate', type=float, default=0.001, help='optimizer learning rate')
     parser.add_argument('--n_epochs', type=int, default=100, help='训练时迭代的次数')
     parser.add_argument('--patience', type=int, default=20, help='提前停止训练的忍耐的轮数')
-    parser.add_argument('--num_workers', type=int, default=6, help='data loader num workers')
+    parser.add_argument('--num_workers', type=int, default=4, help='data loader num workers')
     parser.add_argument('--optimizer', type=str, default='Adam', help='模型训练的优化器')
 
     # GPU有关
