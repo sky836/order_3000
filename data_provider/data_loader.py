@@ -36,7 +36,6 @@ class data(Dataset):
         dates = df.iloc[:, 0].values.astype('datetime64')
         # 按6：1：2划分训练集、验证集和测试集
         l = len(df)
-        print('l:', l)
         num_train = int(len(df) * 0.6)
         num_test = int(len(df) * 0.2)
         num_vali = len(df) - num_train - num_test
@@ -45,6 +44,8 @@ class data(Dataset):
         border2s = [num_train, num_train+num_vali, l]
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
+        print('border1:', border1)
+        print('border2:', border2)
 
         x = df.iloc[:, 1:].values
 
