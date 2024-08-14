@@ -68,11 +68,11 @@ class data(Dataset):
 
         time_stamp = {'date': dates[border1:border2]}
         df_stamp = pd.DataFrame(time_stamp)
-        df_stamp['year'] = df_stamp.date.apply(lambda row: row.year, 1)
-        df_stamp['month'] = df_stamp.date.apply(lambda row: row.month, 1)
-        df_stamp['day'] = df_stamp.date.apply(lambda row: row.day, 1)
-        df_stamp['hour'] = df_stamp.date.apply(lambda row: row.hour, 1)
-        df_stamp['minutes'] = df_stamp.date.apply(lambda row: row.minute, 1)
+        df_stamp['year'] = df_stamp.date.apply(lambda row: row.year)
+        df_stamp['month'] = df_stamp.date.apply(lambda row: row.month)
+        df_stamp['day'] = df_stamp.date.apply(lambda row: row.day)
+        df_stamp['hour'] = df_stamp.date.apply(lambda row: row.hour)
+        df_stamp['minutes'] = df_stamp.date.apply(lambda row: row.minute)
         data_stamp = df_stamp.drop(columns=['date']).values
 
         self.data_x = data
