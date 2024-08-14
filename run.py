@@ -35,7 +35,7 @@ def main():
     # 预测任务有关
     parser.add_argument('--seq_len', type=int, default=60*6, help='input sequence length')
     # parser.add_argument('--label_len', type=int, default=0, help='start token length, no use for WITRAN')
-    parser.add_argument('--pred_len', type=int, default=60*6, help='prediction sequence length')
+    parser.add_argument('--pred_len', type=int, default=60, help='prediction sequence length')
 
     # 模型有关
     # PatchTST
