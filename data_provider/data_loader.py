@@ -44,8 +44,6 @@ class data(Dataset):
         border2s = [num_train, num_train+num_vali, l]
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
-        print('border1:', border1)
-        print('border2:', border2)
 
         x = df.iloc[:, 1:].values
 
