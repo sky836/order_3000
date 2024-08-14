@@ -108,9 +108,8 @@ class Exp_Main(Exp_Basic):
                 if (i + 1) % 100 == 0:
                     speed = (time.time() - time_now) / iter_count
                     left_time = speed * ((n_epochs - epoch) * train_steps - i)
-                    if self.device == 0:
-                        print("\tepoch: {1} | iters: {0} | loss: {2:.7f} | speed: {3:.4f}s/iter | left time: {4:.4f}s".
-                                  format(i + 1, epoch + 1, loss.item(), speed, left_time))
+                    print("\tepoch: {1} | iters: {0} | loss: {2:.7f} | speed: {3:.4f}s/iter | left time: {4:.4f}s".
+                              format(i + 1, epoch + 1, loss.item(), speed, left_time))
                     iter_count = 0
                     time_now = time.time()
 
