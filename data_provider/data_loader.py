@@ -56,6 +56,7 @@ class data(Dataset):
 
         data = x[border1:border2]
         data_y = df.iloc[:, 1:].values[border1:border2]
+        print('l:', len(data))
         feature_list = [data]
         # 对时间进行编码，返回是一个编码后的矩阵，每一行对应一个时间，列为编码后的特征
         stamp = time_features(pd.to_datetime(df.iloc[:, 0].values[border1:border2]), freq='T')

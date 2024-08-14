@@ -58,11 +58,11 @@ def main():
                         help='encoder input size')  # DLinear with --individual, use this hyperparameter as the number of channels
     parser.add_argument('--dec_in', type=int, default=2, help='decoder input size')
     parser.add_argument('--c_out', type=int, default=2, help='output size')
-    parser.add_argument('--d_model', type=int, default=48, help='dimension of model')
+    parser.add_argument('--d_model', type=int, default=96, help='dimension of model')
     parser.add_argument('--n_heads', type=int, default=8, help='num of heads')
     parser.add_argument('--e_layers', type=int, default=2, help='num of encoder layers')
     parser.add_argument('--d_layers', type=int, default=1, help='num of decoder layers')
-    parser.add_argument('--d_ff', type=int, default=48*4, help='dimension of fcn')
+    parser.add_argument('--d_ff', type=int, default=96*4, help='dimension of fcn')
     parser.add_argument('--moving_avg', type=int, default=25, help='window size of moving average')
     parser.add_argument('--factor', type=int, default=1, help='attn factor')
     parser.add_argument('--distil', action='store_false',
@@ -76,8 +76,8 @@ def main():
     parser.add_argument('--do_predict', action='store_true', help='whether to predict unseen future data')
 
     # optimization有关
-    parser.add_argument('--batch_size', type=int, default=256, help='batch size of train input data')
-    parser.add_argument('--learning_rate', type=float, default=0.001, help='optimizer learning rate')
+    parser.add_argument('--batch_size', type=int, default=128, help='batch size of train input data')
+    parser.add_argument('--learning_rate', type=float, default=0.0001, help='optimizer learning rate')
     parser.add_argument('--n_epochs', type=int, default=100, help='训练时迭代的次数')
     parser.add_argument('--patience', type=int, default=20, help='提前停止训练的忍耐的轮数')
     parser.add_argument('--num_workers', type=int, default=4, help='data loader num workers')
