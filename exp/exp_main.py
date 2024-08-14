@@ -68,12 +68,12 @@ class Exp_Main(Exp_Basic):
         # path = os.path.join(self.args.checkpoints, settings)
         # if not os.path.exists(path):
         #     os.makedirs(path)
-        path = 'kaggle/warking/'
+        path = '/kaggle/working/'
 
         # tensorboard_path = os.path.join('./runs/{}/'.format(settings))
         # if not os.path.exists(tensorboard_path):
         #     os.makedirs(tensorboard_path)
-        tensorboard_path = 'kaggle/warking/'
+        tensorboard_path = '/kaggle/working/'
 
         writer = SummaryWriter(log_dir=tensorboard_path)
 

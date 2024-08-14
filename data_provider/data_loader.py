@@ -50,27 +50,24 @@ class data(Dataset):
         x = df.iloc[:, 1:].values
 
         train_data = x[border1s[0]:border2s[0]]
-        train_data_y = x[border1s[0]:border2s[0]]
         self.scaler = StandardScaler(mean=train_data.mean(), std=train_data.std())
         print('mean:', train_data.mean())
         print('std:', train_data.std())
         # 对数据进行标准化
         x = self.scaler.transform(x)
 
-        feature_list = [x]
-        l, n = x.shape
+        data = x[border1:border2]
+        data_y = df.iloc[:, 1:].values[border1:border2]
+        feature_list = [data]
         # 对时间进行编码，返回是一个编码后的矩阵，每一行对应一个时间，列为编码后的特征
-        stamp = time_features(pd.to_datetime(df.iloc[:, 0].values), freq='T')
+        stamp = time_features(pd.to_datetime(df.iloc[:, 0].values[border1:border2]), freq='T')
         # 进行转置，每一行对应一个特征，列为对应的时间
         stamp = stamp.transpose(1, 0)
-        # print(stamp[:10])
-        # print(stamp.shape)
-        print("type stamp:", type(stamp))
-        # stamp_tiled = np.tile(stamp, [n, 1, 1]).transpose((1, 0, 2))
+
         feature_list.append(stamp)
         processed_data = np.concatenate(feature_list, axis=-1)
 
-        time_stamp = {'date': dates}
+        time_stamp = {'date': dates[border1:border2]}
         df_stamp = pd.DataFrame(time_stamp)
         df_stamp['year'] = df_stamp.date.apply(lambda row: row.year, 1)
         df_stamp['month'] = df_stamp.date.apply(lambda row: row.month, 1)
@@ -79,8 +76,8 @@ class data(Dataset):
         df_stamp['minutes'] = df_stamp.date.apply(lambda row: row.minute, 1)
         data_stamp = df_stamp.drop(columns=['date']).values
 
-        self.data_x = x[border1: border2]
-        self.data_y = train_data_y[border1: border2]
+        self.data_x = data
+        self.data_y = data_y
         self.data_stamp = data_stamp
 
     def __getitem__(self, index):
