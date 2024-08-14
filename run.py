@@ -76,7 +76,7 @@ def main():
     parser.add_argument('--do_predict', action='store_true', help='whether to predict unseen future data')
 
     # optimization有关
-    parser.add_argument('--batch_size', type=int, default=128, help='batch size of train input data')
+    parser.add_argument('--batch_size', type=int, default=64, help='batch size of train input data')
     parser.add_argument('--learning_rate', type=float, default=0.0001, help='optimizer learning rate')
     parser.add_argument('--weight_decay', type=float, default=0.0003, help='')
     parser.add_argument('--n_epochs', type=int, default=100, help='训练时迭代的次数')
