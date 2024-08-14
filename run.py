@@ -33,9 +33,9 @@ def main():
     parser.add_argument('--checkpoints', type=str, default='./checkpoints/', help='location of model checkpoints')
 
     # 预测任务有关
-    parser.add_argument('--seq_len', type=int, default=16*4, help='input sequence length')
+    parser.add_argument('--seq_len', type=int, default=3600, help='input sequence length')
     # parser.add_argument('--label_len', type=int, default=0, help='start token length, no use for WITRAN')
-    parser.add_argument('--pred_len', type=int, default=16*4, help='prediction sequence length')
+    parser.add_argument('--pred_len', type=int, default=3600, help='prediction sequence length')
 
     # 模型有关
     # PatchTST
@@ -78,6 +78,7 @@ def main():
     # optimization有关
     parser.add_argument('--batch_size', type=int, default=128, help='batch size of train input data')
     parser.add_argument('--learning_rate', type=float, default=0.0001, help='optimizer learning rate')
+    parser.add_argument('--weight_decay', type=float, default=0.0003, help='')
     parser.add_argument('--n_epochs', type=int, default=100, help='训练时迭代的次数')
     parser.add_argument('--patience', type=int, default=20, help='提前停止训练的忍耐的轮数')
     parser.add_argument('--num_workers', type=int, default=4, help='data loader num workers')
