@@ -124,7 +124,7 @@ def main():
         setting = '{}_{}'.format(
             model_flag,
             formatted_string)
-        setting = 'one_hour'
+        # setting = 'one_hour'
         exp = EXP(args)
         exp.test(setting, test=1)
         torch.cuda.empty_cache()
