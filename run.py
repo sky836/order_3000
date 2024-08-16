@@ -16,7 +16,7 @@ def main():
     parser = argparse.ArgumentParser(description='Models for Long-range Time Series Forecasting')
 
     # 基本的设置
-    parser.add_argument('--is_training', type=int, default=0, help='status')
+    parser.add_argument('--is_training', type=int, default=1, help='status')
     parser.add_argument('--model', type=str, default='transformer', help='options:[transformer]')
     parser.add_argument('--data', type=str, default='data', help='options:[data]')
 
@@ -33,9 +33,9 @@ def main():
     parser.add_argument('--checkpoints', type=str, default='./checkpoints/', help='location of model checkpoints')
 
     # 预测任务有关
-    parser.add_argument('--seq_len', type=int, default=96, help='input sequence length, options:[96, 168, 120]')
-    parser.add_argument('--pred_len', type=int, default=96, help='prediction sequence length, options:[96, 168, 120]')
-    parser.add_argument('--interval', type=int, default=15, help='预测间隔，可选：[15(15m), 60(1h), 360(6h)]')
+    parser.add_argument('--seq_len', type=int, default=168, help='input sequence length, options:[96, 168, 120]')
+    parser.add_argument('--pred_len', type=int, default=168, help='prediction sequence length, options:[96, 168, 120]')
+    parser.add_argument('--interval', type=int, default=60, help='预测间隔，可选：[15(15m), 60(1h), 360(6h)]')
 
     # 模型有关
     # PatchTST
