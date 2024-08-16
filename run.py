@@ -16,7 +16,7 @@ def main():
     parser = argparse.ArgumentParser(description='Models for Long-range Time Series Forecasting')
 
     # 基本的设置
-    parser.add_argument('--is_training', type=int, default=1, help='status')
+    parser.add_argument('--is_training', type=int, default=0, help='status')
     parser.add_argument('--model', type=str, default='transformer', help='options:[transformer]')
     parser.add_argument('--data', type=str, default='data', help='options:[data]')
 
@@ -60,7 +60,7 @@ def main():
     parser.add_argument('--c_out', type=int, default=2, help='output size')
     parser.add_argument('--d_model', type=int, default=96, help='dimension of model')
     parser.add_argument('--n_heads', type=int, default=8, help='num of heads')
-    parser.add_argument('--e_layers', type=int, default=2, help='num of encoder layers')
+    parser.add_argument('--e_layers', type=int, default=4, help='num of encoder layers')
     parser.add_argument('--d_layers', type=int, default=1, help='num of decoder layers')
     parser.add_argument('--d_ff', type=int, default=96*4, help='dimension of fcn')
     parser.add_argument('--moving_avg', type=int, default=25, help='window size of moving average')
@@ -124,7 +124,7 @@ def main():
         setting = '{}_{}'.format(
             model_flag,
             formatted_string)
-        setting = 'RNN_2024_05_13_17_13'
+        setting = 'one_hour'
         exp = EXP(args)
         exp.test(setting, test=1)
         torch.cuda.empty_cache()

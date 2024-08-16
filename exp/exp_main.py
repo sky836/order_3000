@@ -166,7 +166,7 @@ class Exp_Main(Exp_Basic):
         loss_record = []
         preds = []
         trues = []
-        for x, y, _, _ in test_loader:
+        for x, y, x_mark, y_mark in test_loader:
             x, y = x.float().to('cuda'), y.float().to('cuda')
             with torch.no_grad():
                 pred = self.model(x)
