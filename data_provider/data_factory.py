@@ -18,6 +18,7 @@ def data_provider(args, flag):
         root_path=args.root_path,
         data_path=args.data_path,
         flag=flag,
+        interval=args.interval,
         size=[args.seq_len, args.pred_len]
     )
 

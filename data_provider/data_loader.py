@@ -10,7 +10,7 @@ from utils.tools import StandardScaler
 
 
 class data(Dataset):
-    def __init__(self, root_path, data_path='data.csv', flag='train', size=None):
+    def __init__(self, root_path, data_path='data.csv', flag='train', interval=60, size=None):
         self.root_path = root_path
         self.data_path = data_path
 
@@ -26,7 +26,7 @@ class data(Dataset):
             self.seq_len = size[0]
             self.pred_len = size[1]
 
-        self.target = 4
+        self.interval = interval
         self.__read_data__()
 
     def __read_data__(self):
@@ -34,18 +34,24 @@ class data(Dataset):
         df = df.iloc[:, 1:]
         df.iloc[:, 0] = pd.to_datetime(df.iloc[:, 0], errors='coerce')
         dates = df.iloc[:, 0].values.astype('datetime64')
-        # 按6：1：2划分训练集、验证集和测试集
-        l = len(df)
-        num_train = int(len(df) * 0.6)
-        num_test = int(len(df) * 0.2)
-        num_vali = len(df) - num_train - num_test
+
+        interval = self.interval
+        df['group'] = np.arange(len(df)) // interval  # 创建分组索引
+        df_avg = df.groupby('group').mean().reset_index(drop=True)  # 对每组取平均值并重置索引
+        dates = dates[::interval]
+
+        # 按7：1：2划分训练集、验证集和测试集
+        l = len(df_avg)
+        num_train = int(l * 0.7)
+        num_test = int(l * 0.2)
+        num_vali = l - num_train - num_test
         # 设置训练集、验证集、测试集的边界范围，会有seq_len + pred_len的数据用不上
         border1s = [0, num_train-self.seq_len, l-num_test-self.seq_len]
         border2s = [num_train, num_train+num_vali, l]
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
 
-        x = df.iloc[:, 1:].values
+        x = df_avg.values
 
         train_data = x[border1s[0]:border2s[0]]
         self.scaler = StandardScaler(mean=train_data.mean(), std=train_data.std())
@@ -55,11 +61,11 @@ class data(Dataset):
         x = self.scaler.transform(x)
 
         data = x[border1:border2]
-        data_y = df.iloc[:, 1:].values[border1:border2]
+        data_y = df_avg.values[border1:border2]
         print('l:', len(data))
         feature_list = [data]
         # 对时间进行编码，返回是一个编码后的矩阵，每一行对应一个时间，列为编码后的特征
-        stamp = time_features(pd.to_datetime(df.iloc[:, 0].values[border1:border2]), freq='T')
+        stamp = time_features(pd.to_datetime(dates[border1:border2]), freq='T')
         # 进行转置，每一行对应一个特征，列为对应的时间
         stamp = stamp.transpose(1, 0)
 

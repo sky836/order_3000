@@ -33,9 +33,9 @@ def main():
     parser.add_argument('--checkpoints', type=str, default='./checkpoints/', help='location of model checkpoints')
 
     # 预测任务有关
-    parser.add_argument('--seq_len', type=int, default=60*6, help='input sequence length')
-    # parser.add_argument('--label_len', type=int, default=0, help='start token length, no use for WITRAN')
-    parser.add_argument('--pred_len', type=int, default=60, help='prediction sequence length')
+    parser.add_argument('--seq_len', type=int, default=96, help='input sequence length, options:[96, 168, 120]')
+    parser.add_argument('--pred_len', type=int, default=96, help='prediction sequence length, options:[96, 168, 120]')
+    parser.add_argument('--interval', type=int, default=15, help='预测间隔，可选：[15(15m), 60(1h), 360(6h)]')
 
     # 模型有关
     # PatchTST
@@ -76,7 +76,7 @@ def main():
     parser.add_argument('--do_predict', action='store_true', help='whether to predict unseen future data')
 
     # optimization有关
-    parser.add_argument('--batch_size', type=int, default=128, help='batch size of train input data')
+    parser.add_argument('--batch_size', type=int, default=16, help='batch size of train input data')
     parser.add_argument('--learning_rate', type=float, default=0.00003, help='optimizer learning rate')
     parser.add_argument('--weight_decay', type=float, default=0.003, help='')
     parser.add_argument('--n_epochs', type=int, default=100, help='训练时迭代的次数')
