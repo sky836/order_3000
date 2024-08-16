@@ -37,7 +37,7 @@ class data(Dataset):
 
         interval = self.interval
         df['group'] = np.arange(len(df)) // interval  # 创建分组索引
-        df_avg = df.groupby('group').mean().reset_index(drop=True)  # 对每组取平均值并重置索引
+        df_avg = df.groupby('group').agg({'humidity': 'mean', 'temperature': 'mean'}).reset_index(drop=True)  # 对每组取平均值并重置索引
         dates = dates[::interval]
 
         # 按7：1：2划分训练集、验证集和测试集
