@@ -33,7 +33,7 @@ def main():
     parser.add_argument('--checkpoints', type=str, default='./checkpoints/', help='location of model checkpoints')
 
     # 预测任务有关
-    parser.add_argument('--seq_len', type=int, default=168, help='input sequence length, options:[96, 168, 120]')
+    parser.add_argument('--seq_len', type=int, default=168*2, help='input sequence length, options:[96, 168, 120]')
     parser.add_argument('--pred_len', type=int, default=168, help='prediction sequence length, options:[96, 168, 120]')
     parser.add_argument('--interval', type=int, default=60, help='预测间隔，可选：[15(15m), 60(1h), 360(6h)]')
 
