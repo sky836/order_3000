@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 import torch
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, DataLoader
 
 from utils.timefeatures import time_features
 from utils.tools import StandardScaler
@@ -20,8 +20,8 @@ class data(Dataset):
 
         # 用seq_len个序列长度去预测pred_len个序列长度
         if size == None:
-            self.seq_len = 60*24
-            self.pred_len = 60*24
+            self.seq_len = 168
+            self.pred_len = 168
         else:
             self.seq_len = size[0]
             self.pred_len = size[1]
@@ -106,4 +106,11 @@ class data(Dataset):
 
 
 if __name__ == '__main__':
-    d = data(root_path='../', data_path='continues_clean_data.csv')
+    d = data(root_path='../', data_path='continues_clean_data.csv', flag='valid', interval=60)
+    data_loader = DataLoader(
+        d,
+        shuffle=False,
+        drop_last=True,
+        batch_size=1
+    )
+    print(len(data_loader))
